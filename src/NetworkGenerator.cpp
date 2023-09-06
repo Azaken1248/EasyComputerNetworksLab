@@ -44,6 +44,9 @@ int main()
 
     char encryptionKey = 'Y';
 
+    // encryptFile("server.c", "./templates/serverBasic.bin", encryptionKey);
+    // encryptFile("client.c", "./templates/clientBasic.bin", encryptionKey);
+
     std::cout << "Enter server name: ";
     std::cin >> serverCode;
 
