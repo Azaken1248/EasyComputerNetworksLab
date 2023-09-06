@@ -36,22 +36,43 @@ void decryptFile(const std::string &inputFilename, const std::string &outputFile
 
 int main()
 {
-    std::string EServerFile = "./templates/serverBasic.bin";
-    std::string serverCode;
 
-    std::string EClientFile = "./templates/clientBasic.bin";
+    std::string serverCode;
     std::string clientCode;
+    std::string EServerFile;
+    std::string EClientFile;
 
     char encryptionKey = 'Y';
 
-    // encryptFile("server.c", "./templates/serverBasic.bin", encryptionKey);
-    // encryptFile("client.c", "./templates/clientBasic.bin", encryptionKey);
+    // encryptFile("serverTCP.c", "./templates/TCP/serverBasicTCP.bin", encryptionKey);
+    // encryptFile("client.c", "./templates/clientBasicUDP.bin", encryptionKey);
 
     std::cout << "Enter server name: ";
     std::cin >> serverCode;
 
     std::cout << "Enter client name: ";
     std::cin >> clientCode;
+
+    std::string protocol;
+    std::cout << "Enter protocol(TCP/UDP): ";
+    std::cin >> protocol;
+
+    if (protocol == "TCP" || protocol == "tcp")
+    {
+        EServerFile = "./templates/TCP/serverBasicTCP.bin";
+        EClientFile = "./templates/TCP/clientBasicTCP.bin";
+    }
+    else if (protocol == "UDP" || protocol == "udp")
+    {
+        EServerFile = "./templates/UDP/serverBasicUDP.bin";
+        EClientFile = "./templates/UDP/clientBasicUDP.bin";
+    }
+    else
+    {
+        std::cout << "Protocol Not Supported!\nSwitching To TCP Protocol...";
+        EServerFile = "./templates/TCP/serverBasicUDP.bin";
+        EClientFile = "./templates/TCP/clientBasicUDP.bin";
+    }
 
     decryptFile(EServerFile, serverCode, encryptionKey);
     std::cout << "Generation of server was successful." << std::endl;
